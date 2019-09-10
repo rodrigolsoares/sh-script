@@ -1,18 +1,20 @@
 #!/bin/bash
 echo "Procurando arquivos"
 
-array=`find /home/rodrigo/Desktop/restore/* -name "*.java" -exec grep -l -i "br.com.viavarejo" {} \;`
+PATH_DESTINO=/home/rodrigo/Documentos/temp_Java/
+
+array=`find /home/rodrigo/Documentos/temp/* -name "*.java" -exec grep -l -i "br.com.viavarejo" {} \;`
 
 echo "Arquivos selecionados"
 
 echo "Criando novo diretório"
-mkdir -p /home/rodrigo/Desktop/arquivo_java
+mkdir -p $PATH_DESTINO
 
 echo "Copiando os arquivos"
 
 for arquivo in $array
 do
-  cp --parents --preserve -a  "$arquivo" /home/rodrigo/Desktop/arquivo_java/
+  cp -v  "$arquivo" $PATH_DESTINO$(basename "${arquivo}")
 done
 
 echo "Final do processos"
